@@ -1,3 +1,10 @@
+/* Author: Michael Wooton
+ * CS4328 Operating Systems
+ * Project 1 - part1a
+ *
+ * multi-threaded program that generates the Fibonacci number using Pthreads
+*/
+
 #include <stdio.h>
 #include <pthread.h>
 #include <cstdlib>
