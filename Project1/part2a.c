@@ -83,11 +83,11 @@ int main ()
     printf("\nMatrix A * B = C\n");
     printf("\nMatrix C\n");
     for(int i = 0; i < M; i++) {
-		for(int j = 0; j < N; j++) {
-			printf("%d   ", C[i][j]);
-		}
-		printf("\n");
+	for(int j = 0; j < N; j++) {
+		printf("%d   ", C[i][j]);
 	}
+	printf("\n");
+    }
 
-	return 0;
+    return 0;
 }
