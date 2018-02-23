@@ -36,7 +36,7 @@ void *fibonacci(void *param)
     pthread_exit(0);
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     int num; //users input
     pthread_t thread; //the thread identifier
