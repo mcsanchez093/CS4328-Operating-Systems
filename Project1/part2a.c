@@ -42,7 +42,7 @@ void *matrixMul (void *param)
     pthread_exit(0);
 }
 
-int main ()
+int main (int argc, char *argv[])
 {
     pthread_t threads[NUM_THREADS];
 
