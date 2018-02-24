@@ -23,7 +23,6 @@ int C [M][N];
 
 struct thread_args
 {
-    int thread_id;
     int row;
     int col;
 };
@@ -31,50 +30,49 @@ struct thread_args
 void *matrixMul (void *param)
 {
     struct thread_args *data = param;
-    int sum = 0;
+    int i;
 
-    for (int i = 0; i < K; i++)
+    for (i = 0; i < K; i++)
     {
-        sum += A[data->row][i] * B[i][data->col];
+        C[data->row][data->col]  += A[data->row][i] * B[i][data->col];
     }
-
-    C[data->row][data->col] = sum;
     pthread_exit(0);
 }
 
 int main (int argc, char *argv[])
 {
+    int i, j, counter = 0;
     pthread_t threads[NUM_THREADS];
 
-    for (int i = 0; i < M; i++) {
-        for (int j = 0; j < N; j++) {
+    for (i = 0; i < M; i++) {
+        for (j = 0; j < N; j++) {
             struct thread_args *data = (struct thread_args *)
                                         malloc (sizeof (struct thread_args));
-            data->thread_id = i;
             data->row = i;
             data->col = j;
 
-            pthread_create(&threads[data->thread_id], NULL, matrixMul, data);
+            pthread_create(&threads[counter], NULL, matrixMul, data);
+            counter++;
         }
     }
 
     //Wait for threads to complete
-    for(int i = 0; i < NUM_THREADS; i++)
+    for(i = 0; i < NUM_THREADS; i++)
     {
         pthread_join(threads[i], NULL);
     }
 
     printf("Matrix A\n");
-    for (int i = 0; i < M; i++) {
-        for (int j = 0; j < K; j++) {
+    for (i = 0; i < M; i++) {
+        for (j = 0; j < K; j++) {
             printf("%d   ", A[i][j]);
         }
         printf("\n");
     }
 
     printf("\nMatrix B\n");
-    for (int i = 0; i < K; i++) {
-        for (int j = 0; j < N; j++) {
+    for (i = 0; i < K; i++) {
+        for (j = 0; j < N; j++) {
             printf("%d   ", B[i][j]);
         }
         printf("\n");
@@ -82,9 +80,9 @@ int main (int argc, char *argv[])
 
     printf("\nMatrix A * B = C\n");
     printf("\nMatrix C\n");
-    for(int i = 0; i < M; i++) {
-	for(int j = 0; j < N; j++) {
-		printf("%d   ", C[i][j]);
+    for (i = 0; i < M; i++) {
+        for(j = 0; j < N; j++) {
+            printf("%d   ", C[i][j]);
 	}
 	printf("\n");
     }
