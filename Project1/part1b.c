@@ -17,14 +17,13 @@ DWORD WINAPI fibonacci(LPVOID lpParam)
 {
     int size = *((int*) lpParam);
 
-    int fib1 = 0,
-        fib2 = 1;
+    int fib1 = 0, fib2 = 1, i;
     long long int fib3;
 
     fibArr[0] = fib1;
     fibArr[1] = fib2;
 
-    for(int i = 2; i < size; i++)
+    for(i = 2; i < size; i++)
     {
         fib3 = fib1 + fib2;
         fib1 = fib2;
@@ -35,7 +34,7 @@ DWORD WINAPI fibonacci(LPVOID lpParam)
 
 int main(int argc, TCHAR *argv[])
 {
-    int num; //user input
+    int num, i;
 
     DWORD ThreadId;
     HANDLE childThread;
@@ -51,7 +50,7 @@ int main(int argc, TCHAR *argv[])
     }
 
     //Intialize the array
-    for (int i = 0; i < num; i++) {
+    for (i = 0; i < num; i++) {
         fibArr[i] = -1;
     }
 
@@ -71,7 +70,7 @@ int main(int argc, TCHAR *argv[])
     CloseHandle(childThread);
 
     printf("\nThe Fibonacci Sequence is :\n");
-    for (int i = 0; i < num; i++)
+    for (i = 0; i < num; i++)
     {
         printf("fib(%d)= %d\n", i, fibArr[i]);
     }
