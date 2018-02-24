@@ -19,14 +19,13 @@ void *fibonacci(void *param)
 {
     int size = *((int*) param);
 
-    int fib1 = 0,
-        fib2 = 1;
+    int fib1 = 0, fib2 = 1, i;
     long long int fib3;
 
     fibArr[0] = fib1;
     fibArr[1] = fib2;
 
-    for(int i = 2; i < size; i++)
+    for(i = 2; i < size; i++)
     {
         fib3 = fib1 + fib2;
         fib1 = fib2;
@@ -38,7 +37,7 @@ void *fibonacci(void *param)
 
 int main(int argc, char *argv[])
 {
-    int num; //users input
+    int num, i;
     pthread_t thread; //the thread identifier
 
     printf("Enter an integer n that is ( 0 < n <= 45 ): ");
@@ -52,7 +51,7 @@ int main(int argc, char *argv[])
     }
 
     //Intialize the array
-    for (int i = 0; i < num; i++) {
+    for (i = 0; i < num; i++) {
         fibArr[i] = -1;
     }
 
@@ -60,7 +59,7 @@ int main(int argc, char *argv[])
     pthread_join(thread, NULL); //wait for the thread to finish
 
     printf("\nThe Fibonacci Sequence is :\n");
-    for (int i = 0; i < num; i++)
+    for (i = 0; i < num; i++)
     {
         printf("fib(%d)= %d\n", i, fibArr[i]);
     }
