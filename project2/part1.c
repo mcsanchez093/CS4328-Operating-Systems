@@ -29,9 +29,9 @@ int next_out = 0;
 // Producer threads
 void *insert_item (void *param)
 {
-	int index = *((int*) param);
-	int random;
-	srand(time(NULL));
+    int index = *((int*) param);
+    int random;
+    srand(time(NULL));
 
     while (1)
     {
@@ -52,11 +52,11 @@ void *insert_item (void *param)
 // Consumer threads
 void *remove_item (void *param)
 {
-	int index = *((int*) param);
+    int index = *((int*) param);
 
-	while (1)
-	{
-		sem_wait(&full);
+    while (1)
+    {
+	sem_wait(&full);
         pthread_mutex_lock(&mutex);
         
         int item = buffer[next_out];
@@ -65,17 +65,17 @@ void *remove_item (void *param)
 
         pthread_mutex_unlock(&mutex);
         sem_post(&empty);
-	}
+    }
 }
 
 int main(int argc, char *argv[])
 {
-	int time_to_sleep, num_prod, num_con, num_threads, num, thread_num;
+    int time_to_sleep, num_prod, num_con, num_threads, num, thread_num;
 
-	if (argc != 4) 
-	{
-		printf("ERROR: Not enough parameters\n");
-		printf("Usage: ./part1 sleep_time -> number_of_producers -> number_of_consumers\n");
+    if (argc != 4) 
+    {
+	printf("ERROR: Not enough parameters\n");
+	printf("Usage: ./part1 sleep_time -> number_of_producers -> number_of_consumers\n");
         exit(1);
     }
 
